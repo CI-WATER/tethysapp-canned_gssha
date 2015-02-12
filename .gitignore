@@ -1,0 +1,9 @@
+*.egg-info
+*.pyc
+*.class
+*.pyo
+*.pydevproject
+*.project
+*.idea
+*.sqlite3
+*.db
