@@ -1,11 +1,28 @@
 {% extends "canned_gssha/base.html" %}
 
+{% load staticfiles tethys_gizmos %}
+
 {% block app_content %}
-  <h1>Welcome!</h1>
-  <p>Congratulations on creating a new Tethys app!</p>
+  <div class="row">
+    <div class="col-md-2">
+      <form id="parameter-slider-form" method="post">
+        {% gizmo "range_slider" slider1_options %}
+        {% gizmo "range_slider" slider2_options %}
+        {% gizmo "range_slider" slider3_options %}
+        {% gizmo "range_slider" slider4_options %}
+        {% gizmo "range_slider" slider5_options %}
+        {% gizmo "range_slider" slider6_options %}
+        {% gizmo "range_slider" slider7_options %}
+      </form>
+    </div>
+    <div class="col-md-5">
+      {% gizmo "highcharts_plot_view" polar_plot %}
+    </div>
+    <div class="col-md-5">
+      {% gizmo "highcharts_plot_view" line_plot_view %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block app_actions %}
-  <a href="" class="btn btn-default">Next</a>
-  <a href="" class="btn btn-default">Back</a>
 {% endblock %}
