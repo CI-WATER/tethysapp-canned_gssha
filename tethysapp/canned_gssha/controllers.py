@@ -199,10 +199,12 @@ def match(request):
                           float(params['param6']),
                           float(params['param7']))
 
-            result['success'] = True
+
             result['data'] = CannedScenario.match(param_list, False, True)
             result['data']['hydrograph'] = CannedResult.get_hydrograph_by_id(result['data']['scenario_id'])
+            result['success'] = True
         except:
+            raise
             pass
 
     return JsonResponse(data=result, encoder=HighchartsDateEncoder)

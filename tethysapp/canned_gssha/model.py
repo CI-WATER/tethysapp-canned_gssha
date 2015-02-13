@@ -159,8 +159,12 @@ class CannedScenario(Base):
         # Get the match parameters
         match_params = session.query(cls).filter(cls.scenario_id == match_id).one()
 
+        # Close the connection
+        session.close()
+
         return {"scenario_id": match_id,
                 "parameters": match_params.as_list(normalized=return_normalized_match)}
+
 
 class CannedResult(Base):
     """
@@ -181,9 +185,9 @@ class CannedResult(Base):
 
     @classmethod
     def get_hydrograph_by_id(cls, scenario_id):
-        '''
+        """
         Get the hydrograph by scenario id
-        '''
+        """
 
         # Create session
         session = SessionMaker()
@@ -192,6 +196,9 @@ class CannedResult(Base):
         raw_data_string = session.query(cls.hydrograph).\
                                   filter(cls.scenario_id == scenario_id).\
                                   one()
+
+        # Close the connection
+        session.close()
 
         # Split
         lines = raw_data_string[0].splitlines()

@@ -49,7 +49,12 @@ function update_ui() {
       });
 
     } else {
-      hydrograph_plot.series[0].setData(MATCH_HYDROGRAPH);
+      hydrograph_plot.series[0].remove();
+      hydrograph_plot.addSeries({
+        name: 'Hydrograph',
+        color: '#3498db',
+        data: MATCH_HYDROGRAPH
+      });
     }
   }
 
