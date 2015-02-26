@@ -92,7 +92,10 @@ def home(request):
         'yAxis': {
             'gridLineInterpolation': 'polygon',
             'lineWidth': 0,
-            'min': 0
+            'min': 0,
+            'max': 1.00,
+            'tickInterval': 0.25
+
         },
         'tooltip': {
             'valueDecimals': 2,
@@ -143,7 +146,8 @@ def home(request):
             'title': {
                 'enabled': True,
                 'text': 'Flowrate [cms]'
-            }
+            },
+            'max': 100.0
         },
         'tooltip': {
             'pointFormat': '{point.y} cms',
