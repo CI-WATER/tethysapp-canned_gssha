@@ -14,7 +14,7 @@ dependencies = ['django',]
 
 setup(
     name=release_package,
-    version='0.0.1',
+    version='0.1.0',
     description='Access GSSHA model results that have been put away for a rainy day.',
     long_description='',
     keywords='',
