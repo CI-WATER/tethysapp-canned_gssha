@@ -86,7 +86,7 @@ def home(request):
         },
         'xAxis': {
             'categories': ['Temperature', 'Temperature Amplitude', 'Rain Duration',
-                           'Rain Intensity', 'Rain Start', 'Snow Gradient', 'Snow Line'],
+                           'Rain Intensity', 'Rain Start', 'Snow Line', 'Snow Gradient'],
             'tickmarkPlacement': 'on',
             'lineWidth': 0
         },

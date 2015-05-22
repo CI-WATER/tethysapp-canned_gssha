@@ -61,9 +61,10 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 60px;
-  background-color: #0000ff;
+  background-color: cadetblue;
   text-align: center;
   color: white;
   padding: 15px;
   font-size: large;
+  font-weight: bold;
 }
