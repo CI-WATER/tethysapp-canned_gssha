@@ -1,9 +1,50 @@
 // Globals
 var INPUT_SERIES, MATCH_SERIES, SCENARIO_ID, MATCH_HYDROGRAPH;
 
+// Add all layers to the map
+var kml_layer25 = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: '/static/canned_gssha/kml/000-025.kml',
+    format: new ol.format.KML()
+  }),
+  visible: false,
+});
+
+var kml_layer50 = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: '/static/canned_gssha/kml/025-050.kml',
+    format: new ol.format.KML()
+  }),
+  visible: false,
+});
+
+var kml_layer75 = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: '/static/canned_gssha/kml/050-075.kml',
+    format: new ol.format.KML()
+  }),
+  visible: false,
+});
+
+var kml_layer100 = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: '/static/canned_gssha/kml/075-100.kml',
+    format: new ol.format.KML()
+  }),
+  visible: false,
+});
+
+var kml_layer200 = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: '/static/canned_gssha/kml/100-200.kml',
+    format: new ol.format.KML()
+  }),
+  visible: false,
+});
+
 // Update user interface
 function update_ui() {
-  var polar_plot, hydrograph_plot;
+  var polar_plot, hydrograph_plot, map_plot, maxFlow, temp, amp, rainDur, rainInt, rainStart, snowLine, snowGrad;
 
   // Get a handle on the chart
   polar_plot = $('#polar-plot').highcharts();
@@ -58,7 +99,61 @@ function update_ui() {
     }
   }
 
+  // Find the max value of the hydrograph
+  maxFlow = hydrograph_plot.series[0].dataMax;
+  console.log(maxFlow);
 
+  // Find the time to peak from max flow
+  var xValue = null;
+  var points = hydrograph_plot.series[0].points;
+  
+  for (var i = 0; i < points.length; i++) {
+    if (points[i].y = maxFlow) break;
+    xValue = points[i].x;
+  }
+  console.log(xValue);
+
+  // Add flow number to text box
+  $('#flow').text('Max Flow: ' + maxFlow.toFixed(2) + ' cms');
+
+  // Remove all other layers that are visible
+  kml_layer25.setVisible(false);
+  kml_layer50.setVisible(false);
+  kml_layer75.setVisible(false);
+  kml_layer100.setVisible(false);
+  kml_layer200.setVisible(false);
+
+  // Add appropriate flood map to map based on max flow from hydrograph
+  if (maxFlow > 0 && maxFlow < 25) {
+    kml_layer25.setVisible(true);
+  } else if (maxFlow > 25 && maxFlow < 50) {
+      kml_layer50.setVisible(true);
+  } else if (maxFlow > 50 && maxFlow < 75) {
+      kml_layer75.setVisible(true);
+  } else if (maxFlow > 75 && maxFlow < 100) {
+      kml_layer100.setVisible(true);
+  } else if (maxFlow > 100 && maxFlow < 200) {
+      kml_layer200.setVisible(true);
+  } else {
+      null;
+  };
+
+  // Add text next to all sliders of what is selected
+  temp = $('#param1').val();
+  amp = $('#param2').val();
+  rainDur = $('#param3').val(); 
+  rainInt = $('#param4').val();
+  rainStart = $('#param5').val();
+  snowLine = $('#param6').val();
+  snowGrad = $('#param7').val();
+
+  $('#temp').text(temp);
+  $('#amp').text(amp);
+  $('#rainDuration').text(rainDur);
+  $('#rainInt').text(rainInt);
+  $('#rainStart').text(rainStart);
+  $('#snowLine').text(snowLine);
+  $('#snowGradient').text(snowGrad);
 }
 
 // Reset the UI
@@ -125,6 +220,19 @@ function normalize_slider_value(slider_selector) {
 
 }
 
+function addLayers() {
+  // Get handle on map
+  map_plot = TETHYS_MAP_VIEW.getMap();
+
+  // Add all 5 layers to map
+  map_plot.addLayer(kml_layer25);
+  map_plot.addLayer(kml_layer50);
+  map_plot.addLayer(kml_layer75);
+  map_plot.addLayer(kml_layer100);
+  map_plot.addLayer(kml_layer200);
+}
+
+
 // On page load...
 $(document).ready(function() {
   // Initialize globals
@@ -145,4 +253,7 @@ $(document).ready(function() {
       // Find the match
       find_match();
   });
+
+  // Add all layers initially to the map
+  addLayers();
 });

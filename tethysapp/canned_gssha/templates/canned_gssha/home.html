@@ -4,18 +4,19 @@
 
 {% block app_content %}
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <form id="parameter-slider-form" method="post">
-        {% gizmo "range_slider" slider1_options %}<div></div>
-        {% gizmo "range_slider" slider2_options %}
-        {% gizmo "range_slider" slider3_options %}
-        {% gizmo "range_slider" slider4_options %}
-        {% gizmo "range_slider" slider5_options %}
-        {% gizmo "range_slider" slider6_options %}
-        {% gizmo "range_slider" slider7_options %}
+        {% gizmo "range_slider" slider1_options %}<div class='sliderBox'><span class='sliderText' id='temp'></span></div>
+        {% gizmo "range_slider" slider2_options %}<div class='sliderBox'><span class='sliderText' id='amp'></span></div>
+        {% gizmo "range_slider" slider3_options %}<div class='sliderBox'><span class='sliderText' id='rainDuration'></span></div>
+        {% gizmo "range_slider" slider4_options %}<div class='sliderBox'><span class='sliderText' id='rainInt'></span></div>
+        {% gizmo "range_slider" slider5_options %}<div class='sliderBox'><span class='sliderText' id='rainStart'></span></div>
+        {% gizmo "range_slider" slider6_options %}<div class='sliderBox'><span class='sliderText' id='snowLine'></span></div>
+        {% gizmo "range_slider" slider7_options %}<div class='sliderBox'><span class='sliderText' id='snowGradient'></span></div>
       </form>
+      <div id='flowData'><span id ='flow'></span></div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       {% gizmo "map_view" map_view_options %}
     </div>
     <div class="col-md-4">
@@ -27,4 +28,3 @@
 
 {% block app_actions %}
 {% endblock %}
-

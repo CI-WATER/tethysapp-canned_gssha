@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from tethys_gizmos.templatetags.tethys_gizmos import HighchartsDateEncoder
-from tethys_gizmos.gizmo_options import MapViewOptions, MapViewDrawOptions, MapViewViewOptions
+from tethys_gizmos.gizmo_options import MapViewLegendClass, MapViewLayer, MapViewOptions, MapViewDrawOptions, MapViewViewOptions
 
 from model import CannedScenario, CannedResult
 
@@ -169,22 +169,31 @@ def home(request):
     # Define view options for the map
     view_options = MapViewViewOptions(
       projection='EPSG:4326',
-      center=[-100, 40],
-      zoom=3.5,
+      center=[-111.47, 40.2],
+      zoom=11,
       maxZoom=18,
       minZoom=2
     )
+
+    # Define KML layers
+    base_kml_layer = MapViewLayer(source='KML',
+      options={'url': '/static/canned_gssha/kml/onload.kml'},
+      legend_title='Initial KML Layer',
+      legend_extent=[-111.64, 40.08, -111.28, 40.29],
+      legend_classes=[
+         MapViewLegendClass('polygon', 'Watershed Boundary', fill='#ff8000'),
+         MapViewLegendClass('line', 'Stream Network', stroke='#0000ff'),
+    ])   
 
     # Define map view options
     map_view_options = MapViewOptions(
       height='600px',
       width='100%',
       controls=['ZoomSlider', 'Rotate', 'FullScreen',
-                {'MousePosition': {'projection': 'EPSG:4326'}},
-                {'ZoomToExtent': {'projection': 'EPSG:4326', 'extent': [-130, 22, -65, 54]}}],
-      layers=[],
+                {'MousePosition': {'projection': 'EPSG:4326'}},],
+      layers=[base_kml_layer],
       view=view_options,
-      basemap='OpenStreetMap',
+      basemap={'MapQuest': {'layer': 'osm'}},
       legend=True
     )
 
