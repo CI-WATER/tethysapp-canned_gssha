@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from tethys_gizmos.templatetags.tethys_gizmos import HighchartsDateEncoder
+from tethys_gizmos.gizmo_options import MapViewOptions, MapViewDrawOptions, MapViewViewOptions
 
 from model import CannedScenario, CannedResult
 
@@ -110,7 +111,7 @@ def home(request):
 
     polar_plot = {'highcharts_object': polar_plot_object,
                   'width': '100%',
-                  'height': '500px',
+                  'height': '320px',
                   'attributes': 'id=polar-plot'}
 
     # Results plot
@@ -162,8 +163,30 @@ def home(request):
 
     line_plot_view = {'highcharts_object': highcharts_object,
                       'width': '100%',
-                      'height': '500px',
+                      'height': '320px',
                       'attributes': 'id=hydrograph-plot'}
+
+    # Define view options for the map
+    view_options = MapViewViewOptions(
+      projection='EPSG:4326',
+      center=[-100, 40],
+      zoom=3.5,
+      maxZoom=18,
+      minZoom=2
+    )
+
+    # Define map view options
+    map_view_options = MapViewOptions(
+      height='600px',
+      width='100%',
+      controls=['ZoomSlider', 'Rotate', 'FullScreen',
+                {'MousePosition': {'projection': 'EPSG:4326'}},
+                {'ZoomToExtent': {'projection': 'EPSG:4326', 'extent': [-130, 22, -65, 54]}}],
+      layers=[],
+      view=view_options,
+      basemap='OpenStreetMap',
+      legend=True
+    )
 
     context = {'slider1_options': slider1_options,
                'slider2_options': slider2_options,
@@ -173,7 +196,8 @@ def home(request):
                'slider6_options': slider6_options,
                'slider7_options': slider7_options,
                'polar_plot': polar_plot,
-               'line_plot_view': line_plot_view}
+               'line_plot_view': line_plot_view,
+               'map_view_options': map_view_options}
 
     return render(request, 'canned_gssha/home.html', context)
 

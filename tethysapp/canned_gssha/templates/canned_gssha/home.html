@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-2">
       <form id="parameter-slider-form" method="post">
-        {% gizmo "range_slider" slider1_options %}
+        {% gizmo "range_slider" slider1_options %}<div></div>
         {% gizmo "range_slider" slider2_options %}
         {% gizmo "range_slider" slider3_options %}
         {% gizmo "range_slider" slider4_options %}
@@ -15,10 +15,11 @@
         {% gizmo "range_slider" slider7_options %}
       </form>
     </div>
-    <div class="col-md-5">
-      {% gizmo "highcharts_plot_view" polar_plot %}
+    <div class="col-md-6">
+      {% gizmo "map_view" map_view_options %}
     </div>
-    <div class="col-md-5">
+    <div class="col-md-4">
+      {% gizmo "highcharts_plot_view" polar_plot %}
       {% gizmo "highcharts_plot_view" line_plot_view %}
     </div>
   </div>
@@ -26,3 +27,4 @@
 
 {% block app_actions %}
 {% endblock %}
+
