@@ -166,6 +166,9 @@ def home(request):
                       'height': '320px',
                       'attributes': 'id=hydrograph-plot'}
 
+    # Define options for the toggle switch
+    # switch_options = 
+
     # Define view options for the map
     view_options = MapViewViewOptions(
       projection='EPSG:4326',
