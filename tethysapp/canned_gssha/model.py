@@ -5,10 +5,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import func
 
 from lib.scenario_selector import ScenarioSelector
-from utilities import get_persistent_store_engine, decimal_year_to_datetime
+from utilities import  decimal_year_to_datetime
+
+from app import CannedGSSHA as app
 
 # DB Engine, sessionmaker, and base
-engine = get_persistent_store_engine('canned_scenarios_db')
+engine = app.get_persistent_store_engine('canned_scenarios_db')
 SessionMaker = sessionmaker(bind=engine)
 Base = declarative_base()
 

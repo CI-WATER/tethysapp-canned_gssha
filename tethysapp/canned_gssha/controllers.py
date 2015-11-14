@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 from tethys_gizmos.templatetags.tethys_gizmos import HighchartsDateEncoder
+from tethys_sdk.gizmos import HighChartsPolarPlot, PlotView
 from tethys_gizmos.gizmo_options import MVLegendClass, MVLayer, MapView, MVDraw, MVView
 
 from model import CannedScenario, CannedResult
@@ -109,10 +110,39 @@ def home(request):
                    }]
     }
 
-    polar_plot = {'highcharts_object': polar_plot_object,
-                  'width': '100%',
-                  'height': '320px',
-                  'attributes': 'id=polar-plot'}
+    # polar_plot_object = HighChartsPolarPlot(title='Polar Chart',
+    #                                       subtitle='Polar Chart',
+    #                                       pane={
+    #                                           'size': '80%'
+    #                                       },
+    #                                       categories=['Infiltration', 'Soil Moisture', 'Precipitation',
+    #                                                   'Evaporation',
+    #                                                   'Roughness', 'Runoff', 'Permeability', 'Vegetation'],
+    #                                       series=[
+    #                                           {
+    #                                               'name': 'Park City',
+    #                                               'data': [0.2, 0.5, 0.1, 0.8, 0.2, 0.6, 0.8, 0.3],
+    #                                               'pointPlacement': 'on'
+    #                                           },
+    #                                           {
+    #                                               'name': 'Little Dell',
+    #                                               'data': [0.8, 0.3, 0.2, 0.5, 0.1, 0.8, 0.2, 0.6],
+    #                                               'pointPlacement': 'on'
+    #                                           }
+    #                                       ]
+    # )
+
+    # polar_plot = {'highcharts_object': polar_plot_object,
+    #               'width': '100%',
+    #               'height': '320px',
+    #               'attributes': 'id=polar-plot'}
+
+
+
+    polar_plot = PlotView(highcharts_object=polar_plot_object,
+                        width='100%',
+                        height='320px',
+                        attributes='id=polar-plot')
 
     # Results plot
     highcharts_object = {
@@ -161,10 +191,15 @@ def home(request):
                        'data': []}
         ]}
 
-    line_plot_view = {'highcharts_object': highcharts_object,
-                      'width': '100%',
-                      'height': '320px',
-                      'attributes': 'id=hydrograph-plot'}
+    # line_plot_view = {'highcharts_object': highcharts_object,
+    #                   'width': '100%',
+    #                   'height': '320px',
+    #                   'attributes': 'id=hydrograph-plot'}
+
+    line_plot_view = PlotView(highcharts_object=highcharts_object,
+                    width='100%',
+                    height='320px',
+                    attributes='id=hydrograph-plot')
 
     # Define options for the toggle switch
     # switch_options = 

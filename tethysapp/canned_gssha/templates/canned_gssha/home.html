@@ -6,22 +6,22 @@
   <div class="row">
     <div class="col-md-3">
       <form id="parameter-slider-form" method="post">
-        {% gizmo "range_slider" slider1_options %}<div class='sliderBox'><span class='sliderText' id='temp'></span></div>
-        {% gizmo "range_slider" slider2_options %}<div class='sliderBox'><span class='sliderText' id='amp'></span></div>
-        {% gizmo "range_slider" slider3_options %}<div class='sliderBox'><span class='sliderText' id='rainDuration'></span></div>
-        {% gizmo "range_slider" slider4_options %}<div class='sliderBox'><span class='sliderText' id='rainInt'></span></div>
-        {% gizmo "range_slider" slider5_options %}<div class='sliderBox'><span class='sliderText' id='rainStart'></span></div>
-        {% gizmo "range_slider" slider6_options %}<div class='sliderBox'><span class='sliderText' id='snowLine'></span></div>
-        {% gizmo "range_slider" slider7_options %}<div class='sliderBox'><span class='sliderText' id='snowGradient'></span></div>
+        {% gizmo range_slider slider1_options %}<div class='sliderBox'><span class='sliderText' id='temp'></span></div>
+        {% gizmo range_slider slider2_options %}<div class='sliderBox'><span class='sliderText' id='amp'></span></div>
+        {% gizmo range_slider slider3_options %}<div class='sliderBox'><span class='sliderText' id='rainDuration'></span></div>
+        {% gizmo range_slider slider4_options %}<div class='sliderBox'><span class='sliderText' id='rainInt'></span></div>
+        {% gizmo range_slider slider5_options %}<div class='sliderBox'><span class='sliderText' id='rainStart'></span></div>
+        {% gizmo range_slider slider6_options %}<div class='sliderBox'><span class='sliderText' id='snowLine'></span></div>
+        {% gizmo range_slider slider7_options %}<div class='sliderBox'><span class='sliderText' id='snowGradient'></span></div>
       </form>
       <div id='flowData'><span id ='flow'></span></div>
     </div>
     <div class="col-md-5">
-      {% gizmo "map_view" map_view_options %}
+      {% gizmo map_view map_view_options %}
     </div>
     <div class="col-md-4">
-      {% gizmo "highcharts_plot_view" polar_plot %}
-      {% gizmo "highcharts_plot_view" line_plot_view %}
+      {% gizmo plot_view polar_plot %}
+      {% gizmo plot_view line_plot_view %}
     </div>
   </div>
 {% endblock %}
