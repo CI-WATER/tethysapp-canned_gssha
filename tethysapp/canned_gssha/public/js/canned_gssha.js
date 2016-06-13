@@ -101,7 +101,6 @@ function update_ui() {
 
   // Find the max value of the hydrograph
   maxFlow = hydrograph_plot.series[0].dataMax;
-  console.log(maxFlow);
 
   // Find the time to peak from max flow
   var xValue = null;
@@ -111,7 +110,6 @@ function update_ui() {
     if (points[i].y = maxFlow) break;
     xValue = points[i].x;
   }
-  console.log(xValue);
 
   // Add flow number to text box
   $('#flow').text('Max Flow: ' + maxFlow.toFixed(2) + ' cms');
