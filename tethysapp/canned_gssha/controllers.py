@@ -231,7 +231,7 @@ def home(request):
                 {'MousePosition': {'projection': 'EPSG:4326'}},],
       layers=[base_kml_layer],
       view=view_options,
-      basemap={'MapQuest': {'layer': 'osm'}},
+      basemap='OpenStreetMap',
       legend=True
     )
 
